@@ -1,0 +1,27 @@
+export const lesson2 = {
+  id: 2,
+  title: "Bài 2: Adjourn - Transient",
+  description: "20 từ vựng hay về hành động và tính chất sự việc.",
+  words: [
+    { id: 1, vocab: "adjourn", meaning: "kết thúc, giải tán cuộc họp" },
+    { id: 2, vocab: "astute", meaning: "tinh ranh, khôn ngoan" },
+    { id: 3, vocab: "censure", meaning: "sự quở trách, phê bình" },
+    { id: 4, vocab: "demolish", meaning: "phá hủy, san bằng" },
+    { id: 5, vocab: "discharge", meaning: "bốc dỡ hàng, thả ra" },
+    { id: 6, vocab: "dissent", meaning: "bất đồng ý kiến" },
+    { id: 7, vocab: "equitable", meaning: "công bằng, bình đẳng" },
+    { id: 8, vocab: "exonerate", meaning: "giải oan, miễn tội" },
+    { id: 9, vocab: "extemporaneous", meaning: "tùy ứng, không chuẩn bị trước" },
+    { id: 10, vocab: "extricate", meaning: "giải thoát, gỡ rối" },
+    { id: 11, vocab: "forfeit", meaning: "bị tước, bị mất quyền" },
+    { id: 12, vocab: "illegible", meaning: "khó đọc, không đọc được" },
+    { id: 13, vocab: "inadvertently", meaning: "vô tình, không cố ý" },
+    { id: 14, vocab: "inappropriate", meaning: "không thích hợp" },
+    { id: 15, vocab: "lucrative", meaning: "có lợi, sinh lời" },
+    { id: 16, vocab: "permanent", meaning: "lâu dài, vĩnh cửu" },
+    { id: 17, vocab: "prohibit", meaning: "cấm đoán" },
+    { id: 18, vocab: "punctual", meaning: "đúng giờ" },
+    { id: 19, vocab: "rebuke", meaning: "khiển trách, quở mắng" },
+    { id: 20, vocab: "transient", meaning: "ngắn ngủi, thoáng qua" },
+  ]
+};

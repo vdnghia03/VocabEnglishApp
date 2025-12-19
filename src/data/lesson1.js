@@ -1,0 +1,27 @@
+export const lesson1 = {
+  id: 1,
+  title: "Bài 1: Civilian - Vacant",
+  description: "20 từ vựng nâng cao về con người và trạng thái.",
+  words: [
+    { id: 1, vocab: "civilian", meaning: "thường dân" },
+    { id: 2, vocab: "complicated", meaning: "phức tạp, rắc rối" },
+    { id: 3, vocab: "concur", meaning: "đồng ý, tán thành" },
+    { id: 4, vocab: "confirm", meaning: "xác nhận, chứng thực" },
+    { id: 5, vocab: "digress", meaning: "lạc đề" },
+    { id: 6, vocab: "fragile", meaning: "mỏng manh, dễ vỡ" },
+    { id: 7, vocab: "galore", meaning: "phong phú, nhiều" },
+    { id: 8, vocab: "genuine", meaning: "thật, đích thực" },
+    { id: 9, vocab: "hostile", meaning: "thù địch, chống đối" },
+    { id: 10, vocab: "impatient", meaning: "thiếu kiên nhẫn, nôn nóng" },
+    { id: 11, vocab: "inter", meaning: "chôn cất, an táng" },
+    { id: 12, vocab: "mitigate", meaning: "làm dịu, giảm bớt" },
+    { id: 13, vocab: "novice", meaning: "người mới bắt đầu" },
+    { id: 14, vocab: "original", meaning: "nguyên bản, gốc" },
+    { id: 15, vocab: "rarity", meaning: "điều hiếm có" },
+    { id: 16, vocab: "resume", meaning: "bắt đầu lại, tiếp tục" },
+    { id: 17, vocab: "shrink", meaning: "co lại, thụt lùi" },
+    { id: 18, vocab: "sober", meaning: "tỉnh táo, nghiêm túc" },
+    { id: 19, vocab: "suffice", meaning: "đủ, đáp ứng đủ" },
+    { id: 20, vocab: "vacant", meaning: "trống, bỏ không" },
+  ]
+};
