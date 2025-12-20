@@ -18,9 +18,28 @@ function App() {
   // studyStep: 1 (Chép từ) | 2 (Flashcard) | 3 (Nhanh như chớp)
   const [studyStep, setStudyStep] = useState(1);
 
+  // 1. STATE PHÂN TRANG (Thêm mới)
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 4; // Quy định 4 bài 1 trang
+
+  // 2. LOGIC TÍNH TOÁN (Thêm mới)
+  // Tính vị trí cắt mảng: Ví dụ trang 1 cắt từ 0-4, trang 2 cắt từ 4-8
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  
+  // Dữ liệu sẽ hiển thị ở trang hiện tại (Cắt từ danh sách gốc lessonsData)
+  const currentLessons = lessonsData.slice(indexOfFirstItem, indexOfLastItem);
+  
+  // Tính tổng số trang (Ví dụ 6 bài / 4 = 1.5 -> làm tròn lên là 2 trang)
+  const totalPages = Math.ceil(lessonsData.length / itemsPerPage);
+
+  // Hàm chuyển trang
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
+
   // --- ACTIONS ---
   const handleGoToList = () => {
     setView('list');
+    setCurrentPage(1); // Quay về trang 1 khi vào lại danh sách
   };
 
   const handleSelectLesson = (lesson) => {
@@ -150,33 +169,77 @@ function App() {
 
 
             {/* --- VIEW: LIST BÀI HỌC --- */}
+            {/* --- VIEW: LIST BÀI HỌC (ĐÃ NÂNG CẤP PHÂN TRANG) --- */}
             {view === 'list' && (
-                <div className="bg-white p-8 rounded-2xl shadow-sm border border-slate-100 min-h-[600px]">
-                    <h2 className="text-2xl font-bold text-slate-800 mb-6">Thư viện bài học</h2>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        {lessonsData.map((lesson) => (
-                            <div 
-                                key={lesson.id}
-                                onClick={() => handleSelectLesson(lesson)}
-                                className="group border border-slate-200 rounded-xl p-6 cursor-pointer hover:border-blue-400 hover:shadow-md transition-all bg-white"
-                            >
-                                <div className="flex justify-between items-start mb-4">
-                                    <span className="bg-blue-100 text-blue-700 text-xs font-bold px-3 py-1 rounded-full uppercase">
-                                        Lesson {lesson.id}
-                                    </span>
+                <div className="bg-white p-8 rounded-2xl shadow-sm border border-slate-100 min-h-[600px] flex flex-col justify-between">
+                    <div>
+                        <h2 className="text-2xl font-bold text-slate-800 mb-6">Thư viện bài học</h2>
+                        
+                        {/* LƯỚI BÀI HỌC: Hiện các bài trong currentLessons */}
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            {currentLessons.map((lesson) => (
+                                <div 
+                                    key={lesson.id}
+                                    onClick={() => handleSelectLesson(lesson)}
+                                    className="group border border-slate-200 rounded-xl p-6 cursor-pointer hover:border-blue-400 hover:shadow-md transition-all bg-white h-full"
+                                >
+                                    <div className="flex justify-between items-start mb-4">
+                                        <span className="bg-blue-100 text-blue-700 text-xs font-bold px-3 py-1 rounded-full uppercase">
+                                            Lesson {lesson.id}
+                                        </span>
+                                    </div>
+                                    <h3 className="text-xl font-bold text-slate-800 mb-2 group-hover:text-blue-600 transition-colors">
+                                        {lesson.title}
+                                    </h3>
+                                    <p className="text-slate-500 text-sm line-clamp-2">
+                                        {lesson.description}
+                                    </p>
+                                    <div className="mt-4 pt-4 border-t border-slate-50 flex items-center text-sm text-slate-400">
+                                        <span>{lesson.words.length} từ vựng</span>
+                                    </div>
                                 </div>
-                                <h3 className="text-xl font-bold text-slate-800 mb-2 group-hover:text-blue-600 transition-colors">
-                                    {lesson.title}
-                                </h3>
-                                <p className="text-slate-500 text-sm line-clamp-2">
-                                    {lesson.description}
-                                </p>
-                                <div className="mt-4 pt-4 border-t border-slate-50 flex items-center text-sm text-slate-400">
-                                    <span>{lesson.words.length} từ vựng</span>
-                                </div>
-                            </div>
-                        ))}
+                            ))}
+                        </div>
                     </div>
+
+                    {/* FOOTER PHÂN TRANG (Chỉ hiện khi có nhiều hơn 1 trang) */}
+                    {totalPages > 1 && (
+                        <div className="flex justify-center items-center gap-2 mt-10 pt-6 border-t border-slate-50">
+                            
+                            {/* Nút Lùi (Prev) */}
+                            <button 
+                                onClick={() => currentPage > 1 && paginate(currentPage - 1)}
+                                disabled={currentPage === 1}
+                                className={`px-4 py-2 rounded-lg text-sm font-bold transition-all ${currentPage === 1 ? 'text-slate-300 cursor-not-allowed' : 'text-slate-600 hover:bg-slate-100'}`}
+                            >
+                                ← Prev
+                            </button>
+
+                            {/* Dãy số trang (1, 2, 3...) */}
+                            {[...Array(totalPages)].map((_, i) => (
+                                <button
+                                    key={i + 1}
+                                    onClick={() => paginate(i + 1)}
+                                    className={`w-10 h-10 rounded-lg text-sm font-bold transition-all flex items-center justify-center
+                                        ${currentPage === i + 1 
+                                            ? 'bg-[#2c3e50] text-white shadow-md' // Trang đang chọn: Màu đậm
+                                            : 'bg-white text-slate-600 border border-slate-200 hover:bg-slate-50' // Trang khác
+                                        }`}
+                                >
+                                    {i + 1}
+                                </button>
+                            ))}
+
+                            {/* Nút Tới (Next) */}
+                            <button 
+                                onClick={() => currentPage < totalPages && paginate(currentPage + 1)}
+                                disabled={currentPage === totalPages}
+                                className={`px-4 py-2 rounded-lg text-sm font-bold transition-all ${currentPage === totalPages ? 'text-slate-300 cursor-not-allowed' : 'text-slate-600 hover:bg-slate-100'}`}
+                            >
+                                Next →
+                            </button>
+                        </div>
+                    )}
                 </div>
             )}
 
