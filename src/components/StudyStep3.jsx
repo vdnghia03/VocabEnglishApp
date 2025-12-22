@@ -137,7 +137,7 @@ export default function StudyStep3({ lesson, onComplete }) {
                     <div className="text-6xl mb-4">🏆</div>
                     <h3 className="text-xl font-bold text-slate-700 mb-6">Bạn đã thuộc lòng tất cả từ vựng!</h3>
                     <button onClick={onComplete} className="bg-green-700 text-white font-bold py-3 px-10 rounded-full uppercase shadow-md hover:bg-green-800 transition-all">
-                        Hoàn thành bài học
+                        Chuyển sang học ngữ cảnh →
                     </button>
                  </div>
              ) : (
