@@ -8,6 +8,7 @@ import { defaultData } from './data/default';
 import StudyStep1 from './components/StudyStep1';
 import StudyStep2 from './components/StudyStep2';
 import StudyStep3 from './components/StudyStep3'; // Đã thêm Bước 3
+import StudyStep4 from './components/StudyStep4'; // Đã thêm Bước 4
 
 function App() {
   const [currentLesson, setCurrentLesson] = useState(null);
@@ -308,9 +309,18 @@ function App() {
                     {studyStep === 3 && (
                         <StudyStep3 
                             lesson={currentLesson || defaultData} 
+                            onComplete={() => setStudyStep(4)} // Chuyển sang bước 4
+                        />
+                    )}
+
+                    {/* STEP 4: Game hiểu ngữ cảnh từ vựng */}
+                    {studyStep === 4 && (
+                        <StudyStep4 
+                            lesson={currentLesson || defaultData} 
                             onComplete={handleFinishCourse} // Kết thúc khóa học
                         />
                     )}
+
                 </div>
             )}
 
